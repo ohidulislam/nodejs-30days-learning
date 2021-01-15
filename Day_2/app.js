@@ -1,8 +1,6 @@
-// const logger = require('./looger')
-const log = require('./looger')
+// Working with build-in node `path` module
+const path = require('path')
 
-// console.log(module);
-// console.log(logger)
+const pathObj = path.parse(__filename)
 
-// logger.log("You made my day!")
-log("A message for logger.")
+console.log(pathObj);
