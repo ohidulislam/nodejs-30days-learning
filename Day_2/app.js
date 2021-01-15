@@ -1,6 +1,8 @@
 // Working with build-in node `path` module
-const path = require('path')
+const os = require('os')
 
-const pathObj = path.parse(__filename)
+// const freeMem = os.freemem()
+const totalMem = os.totalmem()
 
-console.log(pathObj);
+// console.log(freeMem);
+console.log(totalMem);
