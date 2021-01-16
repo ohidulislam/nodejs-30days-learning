@@ -1,13 +1,10 @@
 const EventEmitter = require('events')
 const Emit = new EventEmitter
 
-
-// Register a Listener
-Emit.on('messageLogged', function() {
-    console.log('Listened to an event');
+// Register Listener
+Emit.on('logging', (args) => {
+    console.log(args.data);
 })
 
 // Raise an event
-Emit.emit('messageLogged')
-
-// console.log(Emit);
+Emit.emit('logging', {data: 'User logged in'})
