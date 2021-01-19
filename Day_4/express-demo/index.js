@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 const courses = [
     {id: 1, name: 'Course 1', price: '$9.92'},
     {id: 2, name: 'Course 2', price: '$3.35'},
@@ -12,6 +14,15 @@ app.get('/', (req, res) => {
 })
 app.get('/api/courses', (req, res) => {
     res.send(courses)
+})
+app.post('/api/courses', (req, res) => {
+    const course = {
+        id: courses.length + 1,
+        name: req.body.name,
+        price: `$${(Math.random() * 10 + 1).toFixed(2)}`
+    }
+    courses.push(course)
+    res.send(course)
 })
 
 app.get('/api/courses/:id', (req, res) => {
