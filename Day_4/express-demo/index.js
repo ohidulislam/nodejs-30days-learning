@@ -16,18 +16,19 @@ app.get('/api/courses', (req, res) => {
     res.send(courses)
 })
 app.post('/api/courses', (req, res) => {
+    const randPrice = (Math.random() * 10 + 1).toFixed(2)
     const course = {
         id: courses.length + 1,
         name: req.body.name,
-        price: `$${(Math.random() * 10 + 1).toFixed(2)}`
+        price: `$${randPrice}`
     }
     courses.push(course)
-    res.send(course)
+    res.send(courses)
 })
 
 app.get('/api/courses/:id', (req, res) => {
     const course = courses.find( c => c.id === parseInt(req.params.id) )
-    if(!course) res.status(404)
+    if(!course) res.status(404).send("Sorry!! The page your are looking for is not found.")
     res.send(course)
 })
 
