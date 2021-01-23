@@ -1,3 +1,7 @@
+const startDebugger = require('debug')('app:startDebugger')
+const dbDebugger = require('debug')('app:dbDebugger')
+
+const config = require('config')
 const helmet = require('helmet')
 const morgan = require('morgan')
 const Joi = require('joi')
@@ -14,16 +18,26 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(helmet())
 
-if(app.get('env') === 'development') {
-    app.use(morgan('tiny'))
-}
-
-// console.log(`App password: ${process.env.APP_PASSWORD}`);
-
-
 // Custom Middleware
 app.use(logger)
 app.use(auth)
+
+if(app.get('env') === 'development') {
+    app.use(morgan('tiny'))
+    startDebugger("Morgan enabled...")
+}
+
+// Database Debugger 
+dbDebugger("Connecting to the database...")
+
+// 
+// console.log(`App password: ${process.env.APP_PASSWORD}`);
+
+console.log(`App name: ${config.get('name')}`);
+console.log(`Email server: ${config.get('mail')}`);
+console.log(`App password: ${config.get('mail.password')}`);
+
+
 
 const courses = [
     {id: 1, name: 'Course 1', price: '$9.92'},
